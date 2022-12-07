@@ -1,47 +1,16 @@
-from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
+import os
+os.system("clear")  # clears the terminal
 
-chatbot = ChatBot(
-    "Molly",
-    storage_adapter="chatterbot.storage.SQLStorageAdapter",
-    logic_adapters=[
-        "chatterbot.logic.MathematicalEvaluation",
-        "chatterbot.logic.TimeLogicAdapter"
-    ],
-    database_url="sqlite:///database.sqlite3"
-)
+print("Hello Steve!  What can I do for you?")
+print("1: Countdown Timer")
+def menu(t):  # Defines menu class
+    t = input("Please select something from the above menu: ")
+    if t == '1':
+        import countdown
+        countdown
+    else:
+        print("That is not an option")
 
-conversation = [
-    "Hello",
-    "Hi there!",
-    "How are you doing?",
-    "I'm doing great.",
-    "That is good to hear.",
-    "Thank you.",
-    "You're welcome."
-]
 
-trainer = ListTrainer(chatbot)
-trainer.train(conversation)
+menu(input)
 
-while True:
-    try:
-        conversation = [
-            "Hello",
-            "Hi there!",
-            "How are you doing?",
-            "I'm doing great.",
-            "That is good to hear.",
-            "Thank you.",
-            "You're welcome."
-        ]
-        trainer = ListTrainer(chatbot)
-        trainer.train(conversation)
-        bot_input = chatbot.get_response(input())
-        print(bot_input)
-
-    except(KeyboardInterrupt, EOFError, SystemExit):
-        break
-
-#response = chatbot.get_response("Good morning!")
-#print(response)
